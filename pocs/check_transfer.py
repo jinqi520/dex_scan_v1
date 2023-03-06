@@ -71,7 +71,7 @@ def checkTransfer(chain, contract_address, pair_contract):
                         amount = amount + int(change['rawAmount'])
                 if amount > balance//2:
                     print("%s链：  合约地址：%s   疑似存在转账收取额外手续费的安全问题，pair合约地址：%s" % (chain, contract_address, pair_contract))
-                    # scanutil.ding_send_text("[chain_poc]" + chain + "：  token合约疑似存在mint方法未鉴权的安全问题：" + contract_address + " pair合约地址：   " + pair_contract)
+                    scanutil.ding_send_text("[chain_poc]" + chain + "：  token合约疑似存在转账收取额外手续费的安全问题：" + contract_address + " pair合约地址：   " + pair_contract)
     except Exception as e:
         print(e)
 
