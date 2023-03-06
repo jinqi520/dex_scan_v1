@@ -34,10 +34,11 @@ def checkMint(chain, contract_address, pair_contract):
             }
             response = requests.post(url, json=payload, headers=headers).json()
             sleep(1)
-            # print(response)
             if response['result']['error'] == "execution reverted":
                 return
             asset_changes = response['result']['changes']
+            if len(asset_changes) == 1 and asset_changes[0]['rawAmount'] == "0":
+                return
             if len(asset_changes) > 0:
                 for change in asset_changes:
                     if change['changeType'] == "TRANSFER" \

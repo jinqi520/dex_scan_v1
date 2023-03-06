@@ -16,10 +16,10 @@ def get_token_to_scan(chain):
     while True:
         cx = sqlite3.connect("./token.db")
         c = cx.cursor()
-        tokens = c.execute("select contract_address, pair_index from token where chain = '" + chain + "' and done = 0 limit 50").fetchall()
+        tokens = c.execute("select contract_address, pair_contract from token where chain = '" + chain + "' and done = 0 limit 50").fetchall()
         for token_info in tokens:
             contract_address = token_info[0]
-            pair_contract = token_info[5]
+            pair_contract = token_info[1]
             checkIsVul(chain.lower(), contract_address, pair_contract)
             c.execute(
                 "update token set done = 1 where contract_address = '" + contract_address + "' and chain = '" + chain + "'")
